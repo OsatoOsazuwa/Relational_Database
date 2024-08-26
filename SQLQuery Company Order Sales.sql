@@ -1,0 +1,57 @@
+CREATE DATABASE Company_Sales
+
+USE Company_Sales
+
+--Creating Tables
+CREATE TABLE Customers(
+	CustomerID INT PRIMARY KEY NOT NULL,
+	FirstName  VARCHAR(200) NOT NULL,
+	LastName VARCHAR(200)NOT NULL,
+	Email VARCHAR(400)NOT NULL,
+	Phone INT NOT NULL,
+	Address VARCHAR(600) NOT NULL,
+	City VARCHAR (300) NOT NULL,
+	State VARCHAR (300)NOT NULL,
+	ZipCode INT NOT NULL,
+	)
+
+	
+
+CREATE TABLE Products(
+	ProductID INT PRIMARY KEY NOT NULL,
+	ProductName VARCHAR(300) NOT NULL,
+	Description VARCHAR(500) NOT NULL,
+	Price Decimal(10,4) NOT NULL,
+	StockQuantity INT NOT NULL,
+	CategoryID INT FOREIGN KEY REFERENCES Categories(CategoryID),
+)
+
+CREATE TABLE Categories(
+	CategoryID INT PRIMARY KEY NOT NULL,
+	CategoryName VARCHAR(300) NOT NULL,
+	Description VARCHAR(500),
+	)
+
+	ALTER TABLE Categories
+	ALTER COLUMN Description VARCHAR(600) NOT NULL;
+
+CREATE TABLE Orders(
+	OrderID INT PRIMARY KEY NOT NULL,
+	CustomerID int FOREIGN KEY REFERENCES Customers(CustomerID) NOT NULL,
+	OrderDate DATE NOT NULL,
+	TotalAmount Decimal (15,4) NOT NULL,
+	)
+
+CREATE TABLE OrderDetails(
+	OrderDetailID INT PRIMARY KEY NOT NULL,
+	OrderID INT FOREIGN KEY REFERENCES Orders(OrderID) NOT NULL,
+	ProductID INT FOREIGN KEY REFERENCES Products(ProductID) NOT NULL,
+	Quantity INT NOT NULL,
+	UnitPrice Decimal(10,3) NOT NULL,
+	)
+
+SELECT * FROM Customers
+SELECT * FROM Products
+SELECT * FROM Categories
+SELECT * FROM OrderDetails
+SELECT * FROM Orders
